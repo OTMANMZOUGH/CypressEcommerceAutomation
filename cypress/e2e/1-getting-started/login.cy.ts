@@ -24,7 +24,23 @@ describe('Login', () => {
             })
         cy.get('app-card').eq(0).contains('button','Add').click()
         cy.contains('a','Checkout').click()
+        //logique for total price
 
+        cy.get('tr td:nth-child(4) strong').each(($el) => {
+            //Get the text (e.g., "₹. 50000")
+            const amount = $el.text();
+            let res = amount.replace(/[^0-9]/g, "");
+            //cy.log(res);
+            totalprice = totalprice + Number(res);
+        })
+        cy.get('h3 strong').then((element) => {
+            const totalValue = element.text().replace(/[^0-9]/g, "");
+            expect(Number(totalValue)).to.equal(totalprice);
+        });
+        cy.contains('button','Checkout').click()
+        cy.get('#country').type('Morocco')
+        cy.get('input[value=Purchase]').click()
+        cy.get('.alert-success').should('be.visible').and('contain', 'Success! Thank you! Your order will be delivered in next few weeks :-).')
 
 
 
