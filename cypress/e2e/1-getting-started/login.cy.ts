@@ -1,42 +1,36 @@
-describe('Login', () => {
+import homePage from "../../support/PageObjects/HomePage";
+interface UserData {
+    prodactName: string;
+    username: string;
+    password: string;
+}
+describe('End to End ecommerce Test', () => {
     let user;
     beforeEach(() => {
         cy.fixture('data').then((data) => {
             user = data;
         });
-        cy.visit('https://rahulshettyacademy.com/loginpagePractise/')
     })
 
     it('Submit Login', () => {
-        let prodactName = "Nokia Edge"
+        let prodactName = user.prodactName;
         let totalprice =0;
-        cy.get('input[name="username"]').type(user.username)
-        cy.get('input[name="password"]').type(user.password)
-        cy.get("#signInBtn").click()
-        cy.contains('Shop Name').should('be.visible')
-        cy.get('app-card').should('have.length', 4)
-        //cy.get('app-card').filter(`:contains("${prodactName}")`)
-        cy.get('app-card').filter(':contains("' + prodactName + '")')
-            .then(($filteredCard) => {
-                //cy.wrap($filteredCard).should('have,length', 1)
-                cy.wrap($filteredCard).contains('button','Add').click()
-                //cy.wrap($filteredCard).find('button').contains('Add').click()
-            })
-        cy.get('app-card').eq(0).contains('button','Add').click()
-        cy.contains('a','Checkout').click()
-        //logique for total price
 
-        cy.get('tr td:nth-child(4) strong').each(($el) => {
-            //Get the text (e.g., "₹. 50000")
-            const amount = $el.text();
-            let res = amount.replace(/[^0-9]/g, "");
-            //cy.log(res);
-            totalprice = totalprice + Number(res);
-        })
-        cy.get('h3 strong').then((element) => {
-            const totalValue = element.text().replace(/[^0-9]/g, "");
-            expect(Number(totalValue)).to.equal(totalprice);
+        homePage.goto(Cypress.env('url') + '/loginpagePractise/')
+        let prodactsPage= homePage.login(user.username, user.password)
+
+        prodactsPage.pageValidation()
+        prodactsPage.verifyCardLimite()
+        prodactsPage.addProdact(prodactName)
+
+        let cartPage= prodactsPage.goToCart()
+        cartPage.sumOfProdact().then((sum) => {
+            cartPage.verifyTotalPrice(sum);
         });
+
+
+
+
         cy.contains('button','Checkout').click()
         cy.get('#country').type('Morocco')
         cy.get('input[value=Purchase]').click()
