@@ -24,8 +24,8 @@ describe('End to End ecommerce Test', () => {
         prodactsPage.addProdact(prodactName)
 
         let cartPage= prodactsPage.goToCart()
-        cartPage.sumOfProdact().then((sum) => {
-            cartPage.verifyTotalPrice(sum);
+        cartPage.sumOfProdact().then((calculatedSum) => {
+            cartPage.verifyTotalPrice(calculatedSum);
         });
 
 
