@@ -2,14 +2,14 @@ class CartPage {
 
     sumOfProdact() {
         let totalprice = 0;
-        cy.get('tr td:nth-child(4) strong').each(($el) => {
-            //Get the text (e.g., "₹. 50000")
+        // AJOUT DU RETURN ICI
+        return cy.get('tr td:nth-child(4) strong').each(($el) => {
             const amount = $el.text();
             let res = amount.replace(/[^0-9]/g, "");
-            //cy.log(res);
             totalprice = totalprice + Number(res);
         }).then(() => {
-            return cy.wrap(totalprice); // On "wrap" le total pour le passer au .then() suivant
+            // On retourne la valeur finale wrapée
+            return cy.wrap(totalprice);
         });
     }
 
@@ -19,7 +19,5 @@ class CartPage {
             expect(Number(totalValue)).to.equal(calculatedSum);
         });
     }
-
 }
-
 export default CartPage;
