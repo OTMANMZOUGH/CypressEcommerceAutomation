@@ -8,7 +8,7 @@ class ProdactsPage {
     verifyCardLimite(){
         cy.get('app-card').should('have.length', 4)
     }
-    goToCar(){
+    goToCart(){
         cy.contains('a','Checkout').click()
         return new CartPage()
     }
