@@ -14,7 +14,6 @@ class ProdactsPage {
     }
     addProdact(prodactName){
 
-
         //cy.get('app-card').filter(`:contains("${prodactName}")`)
         cy.get('app-card').filter(':contains("' + prodactName + '")')
             .then(($filteredCard) => {
