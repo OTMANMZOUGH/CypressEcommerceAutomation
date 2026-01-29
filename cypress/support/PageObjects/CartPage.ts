@@ -1,3 +1,4 @@
+import ConfirmePage from "./ConfirmePage";
 class CartPage {
 
     sumOfProdact() {
