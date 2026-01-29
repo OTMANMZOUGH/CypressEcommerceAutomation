@@ -1,4 +1,18 @@
 {
   "name": "cypress_project",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+
+  "scripts": {
+    "test": "npx cypress run",
+    "headTest": "npx cypress run --headed",
+    "chromTest": "npx cypress run --browser chrome",
+    "recordDashBordTest": "npx cypress run --record --key cefec199-e2bb-4df8-a239-c00085a28129",
+    "loginTest": "npx cypress run --spec cypress/integration/login.spec.js"
+  },
+
+  "devDependencies": {
+    "cypress-mochawesome-reporter": "^4.0.2"
+  }
 }
