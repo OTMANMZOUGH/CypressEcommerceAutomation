@@ -1,9 +1,4 @@
 import homePage from "../../support/PageObjects/HomePage";
-interface UserData {
-    prodactName: string;
-    username: string;
-    password: string;
-}
 describe('End to End ecommerce Test', () => {
     let user;
     beforeEach(() => {
@@ -12,7 +7,7 @@ describe('End to End ecommerce Test', () => {
         });
     })
 
-    it('Submit Login', () => {
+    it('Submit Order', () => {
         let prodactName = user.prodactName;
 
         homePage.goto(Cypress.env('url') + '/loginpagePractise/')
@@ -29,6 +24,8 @@ describe('End to End ecommerce Test', () => {
 
         let confirmePage= cartPage.goToConfirme()
         confirmePage.submitConfirme()
+        confirmePage.getAlertMessage().should('contain', 'Success')
+
 
     })//end it
 })//end describe
