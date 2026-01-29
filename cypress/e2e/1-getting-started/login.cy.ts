@@ -14,7 +14,6 @@ describe('End to End ecommerce Test', () => {
 
     it('Submit Login', () => {
         let prodactName = user.prodactName;
-        let totalprice =0;
 
         homePage.goto(Cypress.env('url') + '/loginpagePractise/')
         let prodactsPage= homePage.login(user.username, user.password)
@@ -28,18 +27,8 @@ describe('End to End ecommerce Test', () => {
             cartPage.verifyTotalPrice(calculatedSum);
         });
 
-
-
-
-        cy.contains('button','Checkout').click()
-        cy.get('#country').type('Morocco')
-        cy.get('input[value=Purchase]').click()
-        cy.get('.alert-success').should('be.visible').and('contain', 'Success! Thank you! Your order will be delivered in next few weeks :-).')
-
-
-
-
-
+        let confirmePage= cartPage.goToConfirme()
+        confirmePage.submitConfirme()
 
     })//end it
 })//end describe

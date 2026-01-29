@@ -19,5 +19,9 @@ class CartPage {
             expect(Number(totalValue)).to.equal(calculatedSum);
         });
     }
+    goToConfirme(){
+        cy.contains('button','Checkout').click()
+        return new ConfirmePage();
+    }
 }
 export default CartPage;
