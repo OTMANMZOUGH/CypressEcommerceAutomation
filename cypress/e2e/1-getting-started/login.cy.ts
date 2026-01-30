@@ -9,7 +9,6 @@ describe('End to End ecommerce Test', () => {
 
     it('Submit Order', () => {
         let prodactName = user.prodactName;
-
         homePage.goto(Cypress.env('url') + '/loginpagePractise/')
         let prodactsPage= homePage.login(user.username, user.password)
 
@@ -25,7 +24,6 @@ describe('End to End ecommerce Test', () => {
         let confirmePage= cartPage.goToConfirme()
         confirmePage.submitConfirme()
         confirmePage.getAlertMessage().should('contain', 'Success')
-
 
     })//end it
 })//end describe
