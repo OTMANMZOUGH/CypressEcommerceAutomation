@@ -25,4 +25,5 @@ class CartPage {
         return new ConfirmePage();
     }
 }
-export default CartPage;
+const cartPage = new CartPage();
+export default cartPage;

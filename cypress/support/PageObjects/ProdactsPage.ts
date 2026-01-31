@@ -24,4 +24,5 @@ class ProdactsPage {
         cy.get('app-card').eq(0).contains('button','Add').click()
     }
 }
-export default ProdactsPage;
+const prodactsPage = new ProdactsPage();
+export default prodactsPage;
