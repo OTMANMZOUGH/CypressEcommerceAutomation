@@ -8,13 +8,12 @@ describe('End to End ecommerce Test', () => {
     })
 
     it('Submit Order', () => {
-        let prodactName = user.prodactName;
         homePage.goto(Cypress.env('url') + '/loginpagePractise/')
         let prodactsPage= homePage.login(user.username, user.password)
 
         prodactsPage.pageValidation()
         prodactsPage.verifyCardLimite()
-        prodactsPage.addProdact(prodactName)
+        prodactsPage.addProdact(user.prodactName)
 
         let cartPage= prodactsPage.goToCart()
         cartPage.sumOfProdact().then((calculatedSum) => {
