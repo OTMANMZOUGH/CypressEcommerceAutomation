@@ -1,30 +1,33 @@
-import {Given,When,Then} from "@badeball/cypress-cucumber-preprocessor";
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 import homePage from "../../../support/PageObjects/HomePage";
 import prodactsPage from "../../../support/PageObjects/ProdactsPage";
-import cartPage from "../../../support/PageObjects/CartPage";
+import { registerUserHook } from "./beforeEach";
 
-Given( 'I am on the ecommerce page', () => {
+registerUserHook();
 
-    homePage.goto(Cypress.env('url') + '/loginpagePractise/')
+Given('I am on the ecommerce page', function () {
+    homePage.goto(Cypress.env('url') + '/loginpagePractise/');
+});
 
-})
-When( 'I click on the Add to cart button', () => {
-    homePage.login(user.username, user.password)
-    prodactsPage.pageValidation()
-    prodactsPage.verifyCardLimite()
-})
-When( 'I should see the prodact in the cart', function () {
+When('I login to the application', function () {
+    homePage.login(this.user.username, this.user.password);
+    prodactsPage.pageValidation();
+    prodactsPage.verifyCardLimite();
+});
 
-    prodactsPage.addProdact(prodactName)
-    let cartPage= prodactsPage.goToCart()
-})
-When( 'I should see the total price', function () {
-    cartPage.sumOfProdact().then((calculatedSum) => {
-        cartPage.verifyTotalPrice(calculatedSum);
+When('I add items to cart and checkout', function () {
+    prodactsPage.addProdact(this.user.prodactName);
+    this.currentCartPage = prodactsPage.goToCart();
+});
+
+When('Validate the total price', function () {
+    this.currentCartPage.sumOfProdact().then((calculatedSum) => {
+        this.currentCartPage.verifyTotalPrice(calculatedSum);
     });
-})
-Then( 'I should see the success message', function () {
-    let confirmePage= cartPage.goToConfirme()
-    confirmePage.submitConfirme()
-    confirmePage.getAlertMessage().should('contain', 'Success')
-})
+});
+
+Then('Select the country submit and verify Thank you', function () {
+    const confirmePage = this.currentCartPage.goToConfirme();
+    confirmePage.submitConfirme();
+    confirmePage.getAlertMessage().should('contain', 'Success');
+});
