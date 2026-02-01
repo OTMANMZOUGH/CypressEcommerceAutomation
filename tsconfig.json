@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM"],
+
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+
+    "types": ["node", "cypress"],
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true
+  },
+  "include": ["cypress.config.ts", "cypress/**/*.ts"]
+}
