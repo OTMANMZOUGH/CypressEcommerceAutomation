@@ -1,4 +1,4 @@
-import CartPage from "./CartPage";
+import cartPage from "./CartPage";
 
 class ProdactsPage {
 
@@ -10,7 +10,7 @@ class ProdactsPage {
     }
     goToCart(){
         cy.contains('a','Checkout').click()
-        return new CartPage()
+        return cartPage;
     }
     addProdact(prodactName){
 
