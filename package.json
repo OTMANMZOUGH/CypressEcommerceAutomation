@@ -20,6 +20,10 @@
     "@badeball/cypress-cucumber-preprocessor": "^24.0.0",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.8",
     "cypress-mochawesome-reporter": "^4.0.2",
-    "esbuild": "^0.27.2"
+    "cypress-on-fix": "^1.1.0",
+    "esbuild": "^0.27.2",
+    "multiple-cucumber-html-reporter": "^3.9.3",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
   }
 }
