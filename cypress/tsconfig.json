@@ -2,7 +2,12 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "allowJs": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "types": ["cypress", "node"]
   },
-  "include": ["../cypress.config.ts", "./**/*.ts"]
+  "include": [
+    "../cypress.config.ts",
+    "./**/*.ts",
+    "./support/index.d.ts"
+  ]
 }
