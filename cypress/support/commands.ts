@@ -10,7 +10,21 @@
 //
 //
 // -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add("LoginByApi", () => {
+    // cy.session met en cache le localStorage, les cookies et le sessionStorage
+    cy.session("user-session", () => {
+        cy.request({
+            method: 'POST',
+            url: 'https://rahulshettyacademy.com/api/ecom/auth/login',
+            body: {
+                userEmail: "votre_email@test.com",
+                userPassword: "votre_password"
+            }
+        }).then((response) => {
+            window.localStorage.setItem('token', response.body.token);
+        });
+    });
+});
 //
 //
 // -- This is a child command --
